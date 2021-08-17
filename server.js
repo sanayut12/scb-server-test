@@ -28,12 +28,14 @@ app.post('/',(req,res)=>{
 
 app.post('/recieve-endpoint',(req,res)=>{
     var data = req.body
+    console.log(data)
     io.emit('scb-callback', JSON.stringify(data));
     res.json({})
 })
 
 app.post('/recieve-callback',(req,res)=>{
     var data = req.body
+    console.log(data)
     io.emit('scb-callback', JSON.stringify(data));
     res.json({})
 })
