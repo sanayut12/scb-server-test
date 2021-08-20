@@ -15,7 +15,7 @@ app.get('/:name', (req, res) => {
     var {name}= req.params
     console.log(name)
     io.emit('test', name);
-    res.send(name)
+    res.json({"name" : name})
 });
 
 app.post('/',(req,res)=>{
