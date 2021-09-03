@@ -29,7 +29,9 @@ app.post('/',(req,res)=>{
 app.post('/recieve-endpoint',(req,res)=>{
     var data = req.body
     console.log(data)
+    
     io.emit('scb-endpoint', JSON.stringify(data));
+    io.emit(data.billPaymentRef1, JSON.stringify(data));
     res.json({})
 })
 
