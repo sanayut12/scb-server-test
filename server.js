@@ -28,7 +28,7 @@ app.post('/',(req,res)=>{
 
 app.post('/recieve-endpoint',(req,res)=>{
     var data = req.body
-    console.log(data)
+    console.log("api : "+data)
     
     io.emit('scb-endpoint', JSON.stringify(data));
     io.emit(data.billPaymentRef1, JSON.stringify(data));
@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('scb-endpoint', msg => {
-        console.log(msg)
+        console.log("socket : "+msg)
         io.emit('scb-endpoint', msg);
       });
 
