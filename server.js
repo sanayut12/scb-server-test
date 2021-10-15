@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const http = require('http').Server(app);
+const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 var port = process.env.PORT || 3002
 app.use(express.json())
@@ -28,8 +28,10 @@ app.post('/',(req,res)=>{
 
 app.post('/recieve-endpoint',(req,res)=>{
     var data = req.body
-    console.log(data)
+    console.log("api : "+data)
+    
     io.emit('scb-endpoint', JSON.stringify(data));
+    io.emit(data.billPaymentRef1, JSON.stringify(data));
     res.json({})
 })
 
@@ -48,7 +50,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('scb-endpoint', msg => {
-        console.log(msg)
+        console.log("socket : "+msg)
         io.emit('scb-endpoint', msg);
       });
 
